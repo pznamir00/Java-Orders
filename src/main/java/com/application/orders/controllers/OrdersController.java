@@ -8,13 +8,4 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/orders")
 public class OrdersController {
-//    @GetMapping
-//    public List<?> getOrdersList() {
-//        //
-//    }
-//
-//    @GetMapping("/{id}")
-//    public getOrderDetails() {
-//        //
-//    }
 }
