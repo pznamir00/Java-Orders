@@ -2,8 +2,10 @@ package com.application.orders.controllers;
 
 import com.application.orders.documents.Order;
 import com.application.orders.exceptions.NotFoundException;
+import com.application.orders.mappers.OrderCreationMapper;
 import com.application.orders.mappers.OrderMapper;
 import com.application.orders.mappers.OrderSimplifiedMapper;
+import com.application.orders.mappers.entities.OrderCreationDTO;
 import com.application.orders.mappers.entities.OrderDTO;
 import com.application.orders.mappers.entities.OrderSimplifiedDTO;
 import com.application.orders.services.OrderService;
@@ -22,6 +24,7 @@ public class OrdersController {
     private OrderService orderService;
     private OrderMapper orderMapper;
     private OrderSimplifiedMapper orderSimplifiedMapper;
+    private OrderCreationMapper orderCreationMapper;
 
     @GetMapping
     public ResponseEntity<List<OrderSimplifiedDTO>> getOrdersList() {
@@ -39,14 +42,14 @@ public class OrdersController {
     }
 
     @PostMapping
-    public ResponseEntity<Order> createOrder(@Valid @RequestBody OrderDTO orderDTO) {
-        final Order order = orderService.createOrder(orderMapper.orderDTOToOrder(orderDTO));
+    public ResponseEntity<Order> createOrder(@Valid @RequestBody OrderCreationDTO orderCreationDTO) {
+        final Order order = orderService.createOrder(orderCreationMapper.orderCreationDTOToOrder(orderCreationDTO));
         return ResponseEntity.status(201).body(order);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Order> updateOrder(@PathVariable String id, @Valid @RequestBody OrderDTO orderDTO) {
-        final Order order = orderService.updateOrder(id, orderMapper.orderDTOToOrder(orderDTO));
+    public ResponseEntity<Order> updateOrder(@PathVariable String id, @Valid @RequestBody OrderCreationDTO orderCreationDTO) {
+        final Order order = orderService.updateOrder(id, orderCreationMapper.orderCreationDTOToOrder(orderCreationDTO));
         return ResponseEntity.status(201).body(order);
     }
 

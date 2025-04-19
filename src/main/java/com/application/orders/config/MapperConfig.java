@@ -1,5 +1,6 @@
 package com.application.orders.config;
 
+import com.application.orders.mappers.OrderCreationMapper;
 import com.application.orders.mappers.OrderMapper;
 import com.application.orders.mappers.OrderSimplifiedMapper;
 import org.springframework.context.annotation.Bean;
@@ -14,4 +15,7 @@ public class MapperConfig {
 
     @Bean
     public OrderMapper orderMapper() { return OrderMapper.INSTANCE; }
+
+    @Bean
+    public OrderCreationMapper orderCreationMapper() { return OrderCreationMapper.INSTANCE; }
 }
