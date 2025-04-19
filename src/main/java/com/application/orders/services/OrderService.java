@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -16,7 +17,24 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public Order create(Order order) {
+    public Optional<Order> findById(String id) {
+        return orderRepository.findById(id);
+    }
+
+    public Order createOrder(Order order) {
         return orderRepository.save(order);
+    }
+
+    public Order updateOrder(String id, Order orderData) {
+        Order order = orderRepository.findById(id).orElseThrow();
+        order.setTitle(orderData.getTitle());
+        order.setDescription(orderData.getDescription());
+        order.setArchived(orderData.isArchived());
+        order.setStatus(orderData.getStatus());
+        return orderRepository.save(order);
+    }
+
+    public void deleteOrder(String id) {
+        orderRepository.deleteById(id);
     }
 }

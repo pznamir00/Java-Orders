@@ -2,7 +2,7 @@ package com.application.orders.documents;
 
 import com.application.orders.enums.OrderStatus;
 import lombok.*;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -10,7 +10,7 @@ import javax.persistence.EntityListeners;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "orders")
