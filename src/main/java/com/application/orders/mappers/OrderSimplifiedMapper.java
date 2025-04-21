@@ -14,5 +14,6 @@ public interface OrderSimplifiedMapper {
     @Mapping(target = "title")
     @Mapping(target = "description")
     @Mapping(target = "status")
+    @Mapping(target = "totalCost")
     OrderSimplifiedDTO orderToOrderDTO(Order order);
 }

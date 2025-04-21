@@ -7,6 +7,7 @@ public record OrderSimplifiedDTO(
    String title,
    String description,
    OrderStatus status,
-   boolean archived
+   boolean archived,
+   double totalCost
 ) {
 }
