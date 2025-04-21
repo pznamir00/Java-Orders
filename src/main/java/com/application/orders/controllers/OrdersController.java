@@ -1,6 +1,8 @@
 package com.application.orders.controllers;
 
+import com.application.orders.criterias.OrderSearchCriteria;
 import com.application.orders.documents.Order;
+import com.application.orders.enums.OrderStatus;
 import com.application.orders.exceptions.NotFoundException;
 import com.application.orders.mappers.OrderCreationMapper;
 import com.application.orders.mappers.OrderMapper;
@@ -27,13 +29,21 @@ public class OrdersController {
     private OrderCreationMapper orderCreationMapper;
 
     @GetMapping
-    public ResponseEntity<List<OrderSimplifiedDTO>> getOrdersList() {
-        final List<OrderSimplifiedDTO> orders = orderService.findAll().stream().map(orderSimplifiedMapper::orderToOrderDTO).toList();
+    public ResponseEntity<List<OrderSimplifiedDTO>> getOrdersByCriteria(
+            @Valid Optional<String> q,
+            @Valid Optional<Boolean> archived,
+            @Valid Optional<OrderStatus> status) {
+        OrderSearchCriteria.OrderSearchCriteriaBuilder criteria = OrderSearchCriteria.builder();
+        q.ifPresent(i -> criteria.query(i));
+        archived.ifPresent(i -> criteria.archived(i));
+        status.ifPresent(i -> criteria.status(i));
+
+        final List<OrderSimplifiedDTO> orders = orderService.findAllByCriteria(criteria.build()).stream().map(orderSimplifiedMapper::orderToOrderDTO).toList();
         return ResponseEntity.ok(orders);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<OrderDTO> getOrderDetails(@PathVariable String id) {
+    public ResponseEntity<OrderDTO> getOrderDetailsById(@PathVariable String id) {
         final Optional<Order> order = orderService.findById(id);
         return order
                 .map(orderMapper::orderToOrderDTO)

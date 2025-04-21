@@ -1,5 +1,6 @@
 package com.application.orders.services;
 
+import com.application.orders.criterias.OrderSearchCriteria;
 import com.application.orders.documents.Order;
 import com.application.orders.repositories.OrderRepository;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,10 @@ public class OrderService {
 
     public Optional<Order> findById(String id) {
         return orderRepository.findById(id);
+    }
+
+    public List<Order> findAllByCriteria(OrderSearchCriteria criteria) {
+        return orderRepository.findAllByCriteria(criteria);
     }
 
     public Order createOrder(Order order) {
