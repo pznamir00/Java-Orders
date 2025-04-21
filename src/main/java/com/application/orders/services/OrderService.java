@@ -30,6 +30,7 @@ public class OrderService {
         order.setTitle(orderData.getTitle());
         order.setDescription(orderData.getDescription());
         order.setArchived(orderData.isArchived());
+        order.setProducts(orderData.getProducts());
         return orderRepository.save(order);
     }
 

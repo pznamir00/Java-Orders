@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.persistence.EntityListeners;
+import java.util.List;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,4 +27,7 @@ public class Order extends BaseDocument {
 
     @Field("archived")
     private boolean archived;
+
+    @Field("products")
+    private List<Product> products;
 }

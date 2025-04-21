@@ -24,5 +24,6 @@ public interface OrderMapper {
     @Mapping(target = "status")
     @Mapping(target = "createdAt")
     @Mapping(target = "updatedAt")
+    @Mapping(target = "products")
     OrderDTO orderToOrderDTO(Order order);
 }
